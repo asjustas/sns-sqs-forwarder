@@ -46,7 +46,11 @@ func (s SqsSubscription) Publish(id string, msg string) error {
 			"MessageBody": {messageBody},
 		})
 
+	if err != nil {
+		return err
+	}
+
 	resp.Body.Close()
 
-	return err
+	return nil
 }
