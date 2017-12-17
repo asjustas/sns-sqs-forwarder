@@ -12,10 +12,6 @@ import (
 	"time"
 )
 
-type Publisher interface {
-	Publish(msg string) error
-}
-
 type SqsSubscription struct {
 	*Subscription
 	QueueName string
