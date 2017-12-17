@@ -32,6 +32,7 @@ func main() {
 		if err != nil {
 			http.Error(w, "Something went wrong reading request body", 500)
 			fmt.Printf("Something went wrong reading request body: %s\n", err)
+
 			return
 		}
 
@@ -40,12 +41,14 @@ func main() {
 		if err != nil {
 			http.Error(w, "Can't parse request body", 400)
 			fmt.Printf("Can't parse request body: %s\n", err)
+
 			return
 		}
 
 		if values["Action"][0] != "Publish" {
 			http.Error(w, "I can only handle Publish action", 400)
 			fmt.Printf("I can only handle Publish action: %s\n", err)
+
 			return
 		}
 

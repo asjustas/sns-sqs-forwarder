@@ -16,10 +16,9 @@ type SqsSubscription struct {
 }
 
 func (s SqsSubscription) Publish(id string, msg string) error {
-	var messageBody string
-	if s.Raw {
-		messageBody = msg
-	} else {
+	messageBody := msg
+
+	if !s.Raw {
 		snsMessage := map[string]string{
 			"Type":      "Notification",
 			"MessageId": id,
@@ -29,9 +28,11 @@ func (s SqsSubscription) Publish(id string, msg string) error {
 		}
 
 		snsMessageJSON, err := json.Marshal(snsMessage)
+
 		if err != nil {
 			return err
 		}
+
 		messageBody = string(snsMessageJSON)
 	}
 
